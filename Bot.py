@@ -105,9 +105,9 @@ async def ban(ctx, user,*, reason=None):
       plrdata1 = Users.User(user)
       plrid1 = str(plrdata1.Id)
       plrusernamefunc = plrid1
-      await ctx.send(f'```\nBANNED ({ctx.author}): {plrusernamefunc}```')
+      await ctx.send(f'```\nBANNED ({ctx.author}): {plrusernamefunc} unban key: {this}```')
     except:
-      await ctx.send(f'```\nBANNED ({ctx.author}): {user}')
+      await ctx.send(f'\nBANNED ({ctx.author}): {user} - use key `{this}` to unban')
 
     sendlog(f'Banned id: `{user}` with key `{this}`')
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Exploiters get banned - Jb9#6554"))
