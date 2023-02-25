@@ -1,0 +1,4 @@
+pyblox3
+requests
+python-dotenv
+discord
