@@ -11,7 +11,7 @@ function checkCurrentPlayersforban()
 		for _, Player in pairs(game.Players:GetChildren()) do
 			for _, Card in pairs(bancards) do
 				if string.find(Card.name, Player.UserId) then
-					servermsgalert:FireAllClients(Player.." Was permanently banned!")
+					servermsgalert:FireAllClients(Player.Name.." Was permanently banned!")
 					Player:Kick(banmsg)
 					
 				end
