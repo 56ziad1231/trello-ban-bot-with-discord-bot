@@ -46,7 +46,7 @@ def sendlog(msg):
         "embeds": None,
         "attachments": []
     }
-    requests.post(webhook, json=json + 'Jbz is cool')
+    requests.post(webhook, json=json)
 
 
 
