@@ -3,8 +3,6 @@ import json
 import os
 import discord
 import asyncio
-import pyblox3
-from pyblox3 import Users
 from discord.ext import commands
 from dotenv import load_dotenv
 load_dotenv()
@@ -53,25 +51,29 @@ def sendlog(msg):
 
 
 
-def getuser(userid):
-  r = requests.get(f'https://users.roblox.com/v1/users/{userid}')
+def getusername(userid):
+  r = requests.get(f'https://api.newstargeted.com/roblox/users/v2/user.php?userId={userid}')
   response = r.json()
-  plrusername = response["name"]
+  plrusername = response["username"]
   print(plrusername)
+
+
+def getuserid(username):
+    r = requests.get(f'https://api.newstargeted.com/roblox/users/v2/user.php?username={username}')
+    response = r.json()
+    plruserid = response['userId']
+
 
 
 @bot.command()
 #@commands.has_role()
 async def ban(ctx, user,*, reason=None):
     if user.isnumeric():
-      opuser = getuser(user)
+      opuser = getusername(user)
       print('User id')
       jbziscool = 'd'
     else:
-      plrdata = Users.User(user)
-      plrid = str(plrdata.Id)
-      user = plrid
-
+        user = getuserid(user)
 
     url = "https://api.trello.com/1/cards"
 
@@ -102,9 +104,7 @@ async def ban(ctx, user,*, reason=None):
     response = requests.request("PUT", url, params=query, data=payload)
 
     try:
-      plrdata1 = Users.User(user)
-      plrid1 = str(plrdata1.Id)
-      plrusernamefunc = plrid1
+      plrusernamefunc = getusername(user)
       await ctx.send(f'```\nBANNED ({ctx.author}): {plrusernamefunc} unban key: {this}```')
     except:
       await ctx.send(f'\nBANNED ({ctx.author}): {user} - use key `{this}` to unban')
